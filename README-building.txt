@@ -89,6 +89,49 @@ At a minimum, you will need the following things to build Wiring:
     
     ---------------------
     
+    I chose 
+    jdk-8u102-linux-x64.rpm
+    java version from Oracle page and clicked on the link.
+    
+    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+    
+    Then I chose to save the jdk-8u102-linux-x64.rpm file. When I clicked on the file, a window for Java Platform Standard Edition Development Kit opened. I chose option Install.
+    
+    ----
+    
+    You need an Oracle Java version for Wiring, not OpenJDK version.
+    
+    Follow instructions on
+    
+    https://github.com/processing/processing/wiki/Supported-Platforms#Linux
+    ->
+    https://help.ubuntu.com/community/Java
+    ->
+    http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
+    
+    The instructions from last page with modifications:
+    
+    Adding a repo
+    
+    # yum-config-manager --add-repo=ppa:webupd8team/java
+    
+    http://unix.stackexchange.com/questions/6827/how-to-add-a-repository-on-fedora
+    
+    # sudo yum update
+    
+    ----
+    
+    # yum -y autoremove java
+    
+    ........ unfinished, continue tomorrow
+    
+    http://www.oracle.com/technetwork/java/javase/downloads/index.html
+    https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
+    https://java.com/en/download/help/linux_install.xml
+    http://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/#
+    http://stackoverflow.com/questions/5104817/how-to-install-java-sdk-on-centos
+    http://www.cyberciti.biz/faq/centos-linux-6-install-java-sdk/
+    
     
     
     ---------------------
