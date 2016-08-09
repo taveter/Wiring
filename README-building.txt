@@ -4,7 +4,60 @@ These instructions apply to the Wiring distribution available on
 GitHub:
 
     https://github.com/WiringProject/Wiring
+    
+    
+    ////////////////////////////
+    
+    Installing CentOS 7
+    
+    1. You can find the CentOS install tutorial from this page
+    
+    https://www.howtoforge.com/tutorial/centos-7-minimal-server/
+    
+    From Software Selection I chose Minimal Install.
+    
+    After installation I followed the instructions of the webpage above and did the following via the command line.
+    
+    
+    # yum update
+    
+    # yum install nano vim
+    
+    # yum install net-tools
+    
+    
+    2. Installing Desktop and Internet Browser
 
+    You can use the option 
+    # yum grouplist 
+    command to list available package groups.
+    
+    https://access.redhat.com/solutions/15815
+    
+    -----------
+    # yum groupinstall "X Window System"
+    
+    https://www.centos.org/forums/viewtopic.php?t=47088
+    ----------------
+    
+    # yum groupinstall "Internet Browser"
+
+    http://www.idevelopment.info/data/Unix/Linux/LINUX_AddGNOMEToCentOSMinimalInstall.shtml
+    
+    
+    # yum groupinstall "GNOME Desktop" 
+    
+    Input a command like below after finishing installation:
+    # startx 
+    
+    http://unix.stackexchange.com/questions/181503/how-to-install-desktop-environments-on-centos-7
+    
+    Now you have a GNOME Desktop.
+    
+    -------------------
+    
+    For reinstalling CentOS you need to hold the F11 key while turning on the computer. From there you can continue to install CentOS.
+    
 
 ////////////////////////////////////////////////////////////////////
 
@@ -33,6 +86,12 @@ At a minimum, you will need the following things to build Wiring:
 
   - Linux: you're on your own. Your distribution's package manager
     likely provides many choices.
+    
+    ---------------------
+    
+    
+    
+    ---------------------
 
 + Apache Ant.
 
