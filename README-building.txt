@@ -194,9 +194,11 @@ At a minimum, you will need the following things to build Wiring:
     First, I needed to install the following thing
     # yum install gcc_c++.86_64
     
+    ...... continue from here
+    
     # /usr/local/avr/gcc-6.1.0/configure --disable-shared --disable-bootstrap --disable-libstdcxx-pch --disable-multilib --enable-languages=all --enable-libgomp --enable-lto --enable-threads=posix --enable-tls --with-gmp=/usr/local/avr --with-mpfr=/usr/local/avr --with-mpc=/usr/local/avr --with-libelf=/var/lib/yum/yumdb/e/0edc2872f12381eefadff909c50f4a7e140ab3f3-elfutils-libelf-devel-0.163-3.el7-x86_64 --with-fpmath=sse
     
-    For each of the files you are using, GMP, MPFR, MPC, Libelf, you need to add the directory where these files can be found
+    For each of the files you are using, GMP, MPFR, MPC, Libelf, you need to add the directory where these files can be found.
     
     # make
     # make check
@@ -215,8 +217,7 @@ At a minimum, you will need the following things to build Wiring:
     
     # wget http://download.savannah.gnu.org/releases/avrdude/avrdude-doc-6.3.tar.gz
 
-    
-    # gunzip -c avrdude-<version>.tar.gz | tar xf -
+    # tar xvf avrdude-<version>.tar.gz
     # cd avrdude-<version>
     # mkdir obj-avr
     # cd obj-avr
