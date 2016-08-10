@@ -4,60 +4,7 @@ These instructions apply to the Wiring distribution available on
 GitHub:
 
     https://github.com/WiringProject/Wiring
-    
-    
-    ////////////////////////////
-    
-    Installing CentOS 7
-    
-    1. You can find the CentOS install tutorial from this page
-    
-    https://www.howtoforge.com/tutorial/centos-7-minimal-server/
-    
-    From Software Selection I chose Minimal Install.
-    
-    After installation I followed the instructions of the webpage above and did the following via the command line.
-    
-    
-    # yum update
-    
-    # yum install nano vim
-    
-    # yum install net-tools
-    
-    
-    2. Installing Desktop and Internet Browser
 
-    You can use the option 
-    # yum grouplist 
-    command to list available package groups.
-    
-    https://access.redhat.com/solutions/15815
-    
-    -----------
-    # yum groupinstall "X Window System"
-    
-    https://www.centos.org/forums/viewtopic.php?t=47088
-    ----------------
-    
-    # yum groupinstall "Internet Browser"
-
-    http://www.idevelopment.info/data/Unix/Linux/LINUX_AddGNOMEToCentOSMinimalInstall.shtml
-    
-    
-    # yum groupinstall "GNOME Desktop" 
-    
-    Input a command like below after finishing installation:
-    # startx 
-    
-    http://unix.stackexchange.com/questions/181503/how-to-install-desktop-environments-on-centos-7
-    
-    Now you have a GNOME Desktop.
-    
-    -------------------
-    
-    For reinstalling CentOS you need to hold the F11 key while turning on the computer. From there you can continue to install CentOS.
-    
 
 ////////////////////////////////////////////////////////////////////
 
@@ -87,55 +34,30 @@ At a minimum, you will need the following things to build Wiring:
   - Linux: you're on your own. Your distribution's package manager
     likely provides many choices.
     
-    ---------------------
-    
-    I chose 
-    jdk-8u102-linux-x64.rpm
-    java version from Oracle page and clicked on the link.
-    
-    http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-    
-    Then I chose to save the jdk-8u102-linux-x64.rpm file. When I clicked on the file, a window for Java Platform Standard Edition Development Kit opened. I chose option Install.
-    
-    ----
-    
-    You need an Oracle Java version for Wiring, not OpenJDK version.
-    
-    Follow instructions on
-    
-    https://github.com/processing/processing/wiki/Supported-Platforms#Linux
-    ->
-    https://help.ubuntu.com/community/Java
-    ->
-    http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
-    
-    The instructions from last page with modifications:
-    
-    Adding a repo
-    
-    # yum-config-manager --add-repo=ppa:webupd8team/java
-    
-    http://unix.stackexchange.com/questions/6827/how-to-add-a-repository-on-fedora
-    
-    # sudo yum update
-    
-    ----
-    
-    # yum -y autoremove java
-    
-    ........ unfinished, continue tomorrow
-    
-    http://www.oracle.com/technetwork/java/javase/downloads/index.html
-    https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
-    https://java.com/en/download/help/linux_install.xml
-    http://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/#
-    http://stackoverflow.com/questions/5104817/how-to-install-java-sdk-on-centos
-    http://www.cyberciti.biz/faq/centos-linux-6-install-java-sdk/
-    
-    
-    
-    ---------------------
+    For clean minimal CentOS installation, install git, then install java. Tested with Oracle Java 
+    wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
 
+    sudo yum localinstall jre-8u60-linux-x64.rpm
+    
+    add JAVA_HOME environment variable to startup scripts
+    
+    following
+    https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
+    https://www.unixmen.com/install-oracle-java-jdk-8-centos-76-56-4/
+    
+    You will need to get GMP, MPFR and MPC to compile recent versions of the GCC compiler suite.
+    You will also want libusb and libelf to complie AVRDUDE
+    (repository versions in Cent OS 7 installed using yum seem to work)
+    
+    Add builds of GCC for AVR target following instructions at:
+    www.nongnu.org/avr-libc/user-manual/intsall_tools.html
+    Add a build of AVRDUDE following instructions at:
+    www.nongnu.org/avr-libc/user-manual/intsall_tools.html
+    After compling and installing avrdude, copy a file that is
+    needed by the wiring IDE from the avrdude directory:
+    >cp obj-avr/avrdude.conf $PREFIX/bin
+    
+    
 + Apache Ant.
 
   - Windows: download and install Ant from its Apache page:
@@ -156,6 +78,13 @@ At a minimum, you will need the following things to build Wiring:
 
   - Linux: you'll likely find Ant in your distribution's package
     manager (e.g. on Debian or Ubuntu: sudo apt-get install ant).
+    
+    For source build on Cent OS
+    git clone https://git-wip-us.apache.org/repos/asf/ant
+    cd ant
+    sh build.sh -Ddist.dir=/usr/ant
+    following
+    https://www.unixmen.com/install-apache-ant-maven-tomcat-centos-76-5/
 
 Depending on your platform, you will also need some other stuff:
 
@@ -176,6 +105,15 @@ Depending on your platform, you will also need some other stuff:
 
     - tar: We test with GNU tar. This is almost certainly already
       installed on your system.
+    - current ant build installs an old version of avr binaries,
+      once the build finishes, copy your version of avr, assuming
+      PREFIX in the avr installation process is set to $HOME/local/avr
+      and $WIRING_DIR is the location where Wiring was cloned to then
+      >cp -r $HOME/local/avr $WIRING_DIR/Wiring/out/dist/wirint-v1.0.1-dev/tools
+      
+    - when building from source, be sure to add user to dialout group
+      to ensure can upload code to wiring board for example using
+      >sudo gpasswd --add $USER dialout
 
 2. GRAB THE CODE FROM GITHUB
 
