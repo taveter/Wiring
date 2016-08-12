@@ -117,6 +117,21 @@ At a minimum, you will need the following things to build Wiring:
     in which directory you build the infrastructure. Before each install make sure you are in the right directory where you want to 
     install something.
     
+    Get the GCC infrastructure:
+    # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/
+    in directory /usr/local/downloads
+    
+    Put downloads in a temp directory (you can use whatever directory you want).
+    /usr/local/downloads
+    
+    Build the infrastructure in a temp directory that is different than the downloads directory or its subdirectories:
+    /usr/local/tmp/gcc
+    
+    Configure the infrastructure using static libaries like this:
+    ./configure --disable-shared --enable-static --prefix=/tmp/gcc
+    
+    
+    
     GMP
     
     Find the latest version of .tar.bz2 file
@@ -124,22 +139,28 @@ At a minimum, you will need the following things to build Wiring:
     for example
     https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
     
+    in /usr/local/downloads
     # wget https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
     
+    in /usr/local/tmp/gcc
     Unzip the .tar.bz2 file
-    # bunzip2 gmp-6.1.1.tar.bz2
+    # bunzip2 /usr/local/downloads/gmp-6.1.1.tar.bz2
     
-    # tar xvf gmp-6.1.1.tar
+    # tar /usr/local/downloads/xvf gmp-6.1.1.tar
     # cd gmp-6.1.1
     
+    /////
     Before
-    # ./configure --disable-shared --enable-static --prefix=/usr/local/avr
+    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
     I needed to install another compiler
     # yum install m4.x86_64
+    /////
     
     Pay attention to change the prefix according to which directory you want the GMP to be installed
-    # ./configure --disable-shared --enable-static --prefix=/usr/local/avr
+    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
     # make && make check && make install
+    
+    **************** GMP ok, binutils not installed yet
     
     ----------------
     
