@@ -62,8 +62,10 @@ At a minimum, you will need the following things to build Wiring:
     
     Before installing make sure you are in the directory where you want to install something.
     
+    Use $PREFIX to refer to whatever directory you wish to install in
+    
     First
-    # PREFIX=$HOME/local/avr
+    # PREFIX=$HOME/tmp/gcc
     # export PREFIX
     
     # PATH=$PATH:$PREFIX/bin
@@ -75,13 +77,15 @@ At a minimum, you will need the following things to build Wiring:
     open the .tar.bz2 (or .tar.gz) link in a new tab. Then copy the address, for example
     http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.gz
     
+    In directory /usr/local/downloads
     # wget http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.gz
     
     (If you choose .tar.bz2 file, then you need to first unzip it with
     # bunzip2 binutils-2.27.tar.bz2
     )
     
-    Next unzip the .tar.gz file
+    In directory /usr/local/tmp/gcc
+    Next unzip the .tar.gz file 
     # tar -xvf binutils-2.27.tar.gz
     
     Continue with 
@@ -94,7 +98,6 @@ At a minimum, you will need the following things to build Wiring:
     
     Note. Before
     # ../configure --prefix=$PREFIX --target=avr --disable-nls
-    
     It was necessary to install a compiler
     # yum install gcc.x86_64
     
@@ -139,22 +142,21 @@ At a minimum, you will need the following things to build Wiring:
     for example
     https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
     
-    in /usr/local/downloads
+    In directory /usr/local/downloads
     # wget https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
     
-    in /usr/local/tmp/gcc
+    In directory /usr/local/tmp/gcc
     Unzip the .tar.bz2 file
     # bunzip2 /usr/local/downloads/gmp-6.1.1.tar.bz2
     
     # tar /usr/local/downloads/xvf gmp-6.1.1.tar
     # cd gmp-6.1.1
     
-    /////
     Before
     # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
     I needed to install another compiler
     # yum install m4.x86_64
-    /////
+    Maybe not necessary in your case.
     
     Pay attention to change the prefix according to which directory you want the GMP to be installed
     # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
