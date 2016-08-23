@@ -10,6 +10,11 @@ GitHub:
 
 //// Steps for First Time Setup
 
+GNOME Desktop Install
+Add-Ons:
+
+Developement Tools (Arendusvahendid) 
+Security Tools
 
 1. INSTALL DEVELOPMENT TOOLS
 
