@@ -57,20 +57,35 @@ At a minimum, you will need the following things to build Wiring:
     ---------------------
     
     Installing GNU Binutils for the AVR target
+    
+    ------------
+    sudo yum install avr-binutils.x86_64
+    -------
+    or
+    
     Follow instructions on 
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html#install_avr_binutils
     
     Before installing make sure you are in the directory where you want to install something.
     
     Use $PREFIX to refer to whatever directory you wish to install in
+    Insatalling destination can be chose with command ./configure ... with flag --prefix=install_destination folder
     
+    I put downloads in home/Programmid
+    and installed GMP, MPFR, MPC in /home/Install
+    
+    /
     First
     # PREFIX=$HOME/tmp/gcc
     # export PREFIX
     
+    PREFIX=$HOME/tmp/gcc
+    usr/tmp/gcc
+    
     # PATH=$PATH:$PREFIX/bin
     # export PATH
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html
+    /
     
     Find the latest version of Binutils on 
     http://ftp.gnu.org/gnu/binutils/
@@ -104,9 +119,9 @@ At a minimum, you will need the following things to build Wiring:
     Then
     # ../configure --prefix=$PREFIX --target=avr --disable-nls
     
-    # make
-    # make check
-    # make install
+    # sudo make
+    # sudo make check
+    # sudo make install
     
     ----------------
     You will need to get GMP, MPFR and MPC to compile recent versions of the GCC compiler suite. Following
@@ -128,11 +143,10 @@ At a minimum, you will need the following things to build Wiring:
     /usr/local/downloads
     
     Build the infrastructure in a temp directory that is different than the downloads directory or its subdirectories:
-    /usr/local/tmp/gcc
+    /usr/tmp/gcc
     
     Configure the infrastructure using static libaries like this:
-    ./configure --disable-shared --enable-static --prefix=/tmp/gcc
-    
+    ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
     
     
     GMP
@@ -162,8 +176,6 @@ At a minimum, you will need the following things to build Wiring:
     # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
     # make && make check && make install
     
-    **************** GMP ok, binutils not installed yet
-    
     ----------------
     
     MPFR
@@ -171,12 +183,15 @@ At a minimum, you will need the following things to build Wiring:
     http://www.mpfr.org/mpfr-current/
     http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2
     
-    # wget http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2
+    In directory /usr/local/downloads
+    # sudo wget http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2
     
-    # bunzip2 mpfr-3.1.4.tar.bz2
-    # tar xvf mpfr-3.1.4.tar
+    In directory /usr/local/tmp/gcc
+    # sudo bunzip2 /usr/local/downloads/mpfr-3.1.4.tar.bz2
+    # sudo tar xvf /usr/local/downloads/mpfr-3.1.4.tar
     # cd mpfr-3.1.4
-    # ./configure --disable-shared --enable-static --prefix=/usr/local/avr --with-gmp=/usr/local/avr
+    
+    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc --with-gmp=/usr/tmp/gcc
     # make && make check && make install
     
     -----------
@@ -190,7 +205,7 @@ At a minimum, you will need the following things to build Wiring:
     
     # tar xvf mpc-1.0.3.tar.gz
     # cd mpc-1.0.3
-    # ./configure --disable-shared --enable-static --prefix=/usr/local/avr --with-gmp=/usr/local/avr --with-mpfr=/usr/local/avr
+    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc --with-gmp=/usr/tmp/gcc --with-mpfr=/usr/tmp/gcc
     # make && make check && make install
 
     -----------
@@ -220,22 +235,22 @@ At a minimum, you will need the following things to build Wiring:
     
     # wget http://www.netgull.com/gcc/releases/gcc-6.1.0/gcc-6.1.0.tar.gz
     
-    # tar xvf gcc-<version>.tar.gz
-    # cd gcc-<version>
+    # tar xvf gcc-6.1.0.tar.gz
+    # cd gcc-6.1.0
     
-    
-    # mkdir obj-avr
-    # cd obj-avr
+    Read important info about where to run configure from the following link.
+    https://gcc.gnu.org/wiki/FAQ#Why_does_my_..2BAC8-configure_and_make_fail.3F
     
     First, I needed to install the following thing
     # yum install gcc-c++.86_64
     
-    worked so far
-    ..............
+    If prefix declared and exported earlier, then you can use prefix=$PREFIX.
     
-    # ../configure --prefix=$PREFIX --target=avr --enable-languages=c,c++ --disable-nls --disable-libssp --with-dwarf2 --with-gmp=/usr/local/avr --with-mpfr=/usr/local/avr --with-mpc=/usr/local/avr
+    --------done so far
     
-    For each of the files you are using, GMP, MPFR, MPC, Libelf, you need to add the directory where these files can be found.
+    # ../configure --prefix=/usr/tmp/gcc-avr --target=avr --enable-languages=c,c++ --disable-nls --disable-libssp --with-dwarf2 --with-gmp=/usr/tmp/gcc --with-mpfr=/usr/tmp/gccr --with-mpc=/usr/tmp/gcc
+    
+    For each of the files you are using, GMP, MPFR, MPC, Libelf, you need to add the directory where these files are installed.
     
     # make
     # make check
@@ -264,10 +279,9 @@ At a minimum, you will need the following things to build Wiring:
     # cd avrdude-<version>
     # mkdir obj-avr
     # cd obj-avr
-    # ../configure --prefix=$PREFIX
+    # ../configure --prefix=/usr/tmp/gcc
     # make
     # make install
-
     
     After compling and installing avrdude, copy a file that is
     needed by the wiring IDE from the avrdude directory:
