@@ -39,7 +39,18 @@ At a minimum, you will need the following things to build Wiring:
   - Linux: you're on your own. Your distribution's package manager
     likely provides many choices.
     
+    In home directory /home/ttaveter
+    
     For clean minimal CentOS installation, install git, then install java. Tested with Oracle Java 
+    # sudo yum install git-all
+    
+    https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+    # sudo yum update
+    
+    Removed the java openjdk version
+    # sudo yum remove java-1.8.0-openjdk
+    
+    # cd ~
     # wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
 
     # sudo yum localinstall jdk-8u60-linux-x64.rpm
@@ -54,6 +65,8 @@ At a minimum, you will need the following things to build Wiring:
 
     # sudo sh -c "echo export JAVA_HOME=/usr/java/jdk1.8.0_60/jre >> /etc/environment"
     
+    # rm ~/jdk-8u60-linux-x64.rpm
+    
     following
     https://www.digitalocean.com/community/tutorials/how-to-install-java-on-centos-and-fedora
     or
@@ -64,7 +77,7 @@ At a minimum, you will need the following things to build Wiring:
     Installing GNU Binutils for the AVR target
     
     ------------
-    sudo yum install avr-binutils.x86_64
+    sudo yum install binutils.x86_64
     -------
     or
     
@@ -81,7 +94,7 @@ At a minimum, you will need the following things to build Wiring:
     
     /
     First
-    # PREFIX=$HOME/tmp/gcc
+    # PREFIX=$HOME/ttaveter/Programmid/Install
     # export PREFIX
     
     PREFIX=$HOME/tmp/gcc
@@ -89,27 +102,27 @@ At a minimum, you will need the following things to build Wiring:
     
     # PATH=$PATH:$PREFIX/bin
     # export PATH
+    
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html
-    /
     
     Find the latest version of Binutils on 
     http://ftp.gnu.org/gnu/binutils/
     open the .tar.bz2 (or .tar.gz) link in a new tab. Then copy the address, for example
     http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.gz
     
-    In directory /usr/local/downloads
+    In directory /home/ttaveter/Programmid/Source
     # wget http://ftp.gnu.org/gnu/binutils/binutils-2.27.tar.gz
     
     (If you choose .tar.bz2 file, then you need to first unzip it with
     # bunzip2 binutils-2.27.tar.bz2
     )
     
-    In directory /usr/local/tmp/gcc
     Next unzip the .tar.gz file 
     # tar -xvf binutils-2.27.tar.gz
     
     Continue with 
-    # cd binutils-<version>
+    # cd binutils-2.27
+    
     and next instructions from
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html#install_avr_binutils
     
@@ -124,11 +137,14 @@ At a minimum, you will need the following things to build Wiring:
     Then
     # ../configure --prefix=$PREFIX --target=avr --disable-nls
     
+    
     # sudo make
     # sudo make check
     # sudo make install
+    --------------------done so far
     
     ----------------
+    
     You will need to get GMP, MPFR and MPC to compile recent versions of the GCC compiler suite. Following
     
     http://stackoverflow.com/questions/9450394/how-to-install-gcc-piece-by-piece-with-gmp-mpfr-mpc-elf-without-shared-libra
@@ -136,9 +152,9 @@ At a minimum, you will need the following things to build Wiring:
     Quite similar as Binutils install
     
     NOTE! 
-    Make sure you read the previous page carefully from the beginning. Pay attention in which directory you put the downloads and 
-    in which directory you build the infrastructure. Before each install make sure you are in the right directory where you want to 
-    install something.
+    Make sure you read the previous page carefully from the beginning. 
+    Pay attention in which directory you put the downloads and in which directory you build the infrastructure. 
+    Before each install make sure you are in the right directory where you want to install something.
     
     Get the GCC infrastructure:
     # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/
@@ -234,6 +250,7 @@ At a minimum, you will need the following things to build Wiring:
     www.nongnu.org/avr-libc/user-manual/install_tools.html
     
     GCC
+    use some other source than netgull
     
     http://www.netgull.com/gcc/releases/
     http://www.netgull.com/gcc/releases/gcc-6.1.0/gcc-6.1.0.tar.gz
