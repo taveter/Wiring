@@ -137,11 +137,9 @@ At a minimum, you will need the following things to build Wiring:
     Then
     # ../configure --prefix=$PREFIX --target=avr --disable-nls
     
-    
     # sudo make
     # sudo make check
     # sudo make install
-    --------------------done so far
     
     ----------------
     
@@ -153,80 +151,68 @@ At a minimum, you will need the following things to build Wiring:
     
     NOTE! 
     Make sure you read the previous page carefully from the beginning. 
-    Pay attention in which directory you put the downloads and in which directory you build the infrastructure. 
-    Before each install make sure you are in the right directory where you want to install something.
+    Pay attention in which directory you put the downloads and in which directory you build the infrastructure.
     
     Get the GCC infrastructure:
     # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/
-    in directory /usr/local/downloads
     
     Put downloads in a temp directory (you can use whatever directory you want).
-    /usr/local/downloads
+    /home/ttaveter/Programmid/Source
     
     Build the infrastructure in a temp directory that is different than the downloads directory or its subdirectories:
-    /usr/tmp/gcc
+    /home/ttaveter/ttaveter/Programmid/Install
     
     Configure the infrastructure using static libaries like this:
-    ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
+    ./configure --disable-shared --enable-static --prefix=$PREFIX
     
     
     GMP
     
-    Find the latest version of .tar.bz2 file
-    https://gmplib.org/
-    for example
-    https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
+    Find the latest version of .tar.bz2 file from 
+    ftp://gcc.gnu.org/pub/gcc/infrastructure/
+
+    In directory /home/ttaveter/Programmid/Source
+    # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/gmp-6.1.0.tar.bz2
     
-    In directory /usr/local/downloads
-    # wget https://gmplib.org/download/gmp/gmp-6.1.1.tar.bz2
-    
-    In directory /usr/local/tmp/gcc
     Unzip the .tar.bz2 file
-    # bunzip2 /usr/local/downloads/gmp-6.1.1.tar.bz2
+    # bunzip2 gmp-6.1.0.tar.bz2
     
-    # tar /usr/local/downloads/xvf gmp-6.1.1.tar
-    # cd gmp-6.1.1
+    # tar -xvf gmp-6.1.0.tar
+    # cd gmp-6.1.0
     
     Before
-    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
+    # ./configure --disable-shared --enable-static --prefix=$PREFIX
     I needed to install another compiler
+    
     # yum install m4.x86_64
     Maybe not necessary in your case.
     
     Pay attention to change the prefix according to which directory you want the GMP to be installed
-    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc
+    # ./configure --disable-shared --enable-static --prefix=$PREFIX
     # make && make check && make install
     
     ----------------
     
     MPFR
     
-    http://www.mpfr.org/mpfr-current/
-    http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2
-    
-    In directory /usr/local/downloads
-    # sudo wget http://www.mpfr.org/mpfr-current/mpfr-3.1.4.tar.bz2
-    
-    In directory /usr/local/tmp/gcc
-    # sudo bunzip2 /usr/local/downloads/mpfr-3.1.4.tar.bz2
-    # sudo tar xvf /usr/local/downloads/mpfr-3.1.4.tar
+    In directory home/ttaveter/Programmid/Source
+    # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpfr-3.1.4.tar.bz2
+
+    # bunzip2 mpfr-3.1.4.tar.bz2
+    # tar -xvf mpfr-3.1.4.tar
     # cd mpfr-3.1.4
     
-    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc --with-gmp=/usr/tmp/gcc
+    # ./configure --disable-shared --enable-static --prefix=$PREFIX --with-gmp=$PREFIX
     # make && make check && make install
     
     -----------
     
     MPC
     
-    http://www.multiprecision.org/index.php?prog=mpc&page=download
-    ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
-    
-    # wget ftp://ftp.gnu.org/gnu/mpc/mpc-1.0.3.tar.gz
-    
-    # tar xvf mpc-1.0.3.tar.gz
+    # wget ftp://gcc.gnu.org/pub/gcc/infrastructure/mpc-1.0.3.tar.gz
+    # tar -xvf mpc-1.0.3.tar.gz
     # cd mpc-1.0.3
-    # ./configure --disable-shared --enable-static --prefix=/usr/tmp/gcc --with-gmp=/usr/tmp/gcc --with-mpfr=/usr/tmp/gcc
+    # ./configure --disable-shared --enable-static --prefix=$PREFIX --with-gmp=$PREFIX --with-mpfr=$PREFIX
     # make && make check && make install
 
     -----------
@@ -250,27 +236,32 @@ At a minimum, you will need the following things to build Wiring:
     www.nongnu.org/avr-libc/user-manual/install_tools.html
     
     GCC
-    use some other source than netgull
     
-    http://www.netgull.com/gcc/releases/
-    http://www.netgull.com/gcc/releases/gcc-6.1.0/gcc-6.1.0.tar.gz
+    # wget ftp://gd.tuwien.ac.at/gnu/gcc/releases/gcc-6.2.0/gcc-6.2.0.tar.bz2
+    # bunzip2 gcc-6.2.0.tar.bz2
+    # tar -xvf gcc-6.2.0.tar
     
-    # wget http://www.netgull.com/gcc/releases/gcc-6.1.0/gcc-6.1.0.tar.gz
+    https://gcc.gnu.org/wiki/FAQ#configure
+    Make a peer gcc-build directory next to the GCC source code directory
     
-    # tar xvf gcc-6.1.0.tar.gz
-    # cd gcc-6.1.0
+    # cd $HOME/Programmid
+    # mkdir gcc-build
+    # cd gcc-build
     
     Read important info about where to run configure from the following link.
-    https://gcc.gnu.org/wiki/FAQ#Why_does_my_..2BAC8-configure_and_make_fail.3F
+    https://gcc.gnu.org/wiki/FAQ#configure
+    
+    
+    
+    
     
     First, I needed to install the following thing
     # yum install gcc-c++.86_64
     
-    If prefix declared and exported earlier, then you can use prefix=$PREFIX.
+    If prefix declared and exported earlier, then you can use --with-gmp=$PREFIX -with-mpfr=$PREFIX --with-mpc=$PREFIX
     
-    --------done so far
     
-    # ../configure --prefix=/usr/tmp/gcc-avr --target=avr --enable-languages=c,c++ --disable-nls --disable-libssp --with-dwarf2 --with-gmp=/usr/tmp/gcc --with-mpfr=/usr/tmp/gccr --with-mpc=/usr/tmp/gcc
+    #  /home/ttaveter/Programmid/Source/gcc-6.2.0/configure --prefix=/home/ttaveter/ttaveter/Programmid/GCC --target=avr --enable-languages=c,c++ --disable-nls --disable-libssp --disable-shared --with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX
     
     For each of the files you are using, GMP, MPFR, MPC, Libelf, you need to add the directory where these files are installed.
     
@@ -278,11 +269,14 @@ At a minimum, you will need the following things to build Wiring:
     # make check
     # make install
     
+    -----------------------done so far
+    
     http://stackoverflow.com/questions/9450394/how-to-install-gcc-piece-by-piece-with-gmp-mpfr-mpc-elf-without-shared-libra
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html
     
     Might be helpful
     
+    https://gcc.gnu.org/install/download.html
     https://gcc.gnu.org/wiki/InstallingGCC
     https://gcc.gnu.org/install/index.html
     https://gcc.gnu.org/wiki/FAQ#configure
