@@ -200,7 +200,7 @@ At a minimum, you will need the following things to build Wiring:
 
     # bunzip2 mpfr-3.1.4.tar.bz2
     # tar -xvf mpfr-3.1.4.tar
-    # cd mpfr-3.1.4
+    # cd mpfr-3.1.4           ///////  cd mpfr/3.1.4
     
     # ./configure --disable-shared --enable-static --prefix=$PREFIX --with-gmp=$PREFIX
     # make && make check && make install
