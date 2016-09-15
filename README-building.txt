@@ -251,15 +251,10 @@ At a minimum, you will need the following things to build Wiring:
     Read important info about where to run configure from the following link.
     https://gcc.gnu.org/wiki/FAQ#configure
     
-    
-    
-    
-    
     First, I needed to install the following thing
     # yum install gcc-c++.86_64
     
     If prefix declared and exported earlier, then you can use --with-gmp=$PREFIX -with-mpfr=$PREFIX --with-mpc=$PREFIX
-    
     
     #  /home/ttaveter/Programmid/Source/gcc-6.2.0/configure --prefix=/home/ttaveter/ttaveter/Programmid/GCC --target=avr --enable-languages=c,c++ --disable-nls --disable-libssp --disable-shared --with-gmp=$PREFIX --with-mpfr=$PREFIX --with-mpc=$PREFIX
     
@@ -268,8 +263,6 @@ At a minimum, you will need the following things to build Wiring:
     # make
     # make check
     # make install
-    
-    -----------------------done so far
     
     http://stackoverflow.com/questions/9450394/how-to-install-gcc-piece-by-piece-with-gmp-mpfr-mpc-elf-without-shared-libra
     http://www.nongnu.org/avr-libc/user-manual/install_tools.html
@@ -289,19 +282,19 @@ At a minimum, you will need the following things to build Wiring:
     http://download.savannah.gnu.org/releases/avrdude/
     http://download.savannah.gnu.org/releases/avrdude/avrdude-doc-6.3.tar.gz
     
-    # wget http://download.savannah.gnu.org/releases/avrdude/avrdude-doc-6.3.tar.gz
+    # wget download.savannah.gnu.org/releases/avrdude/avrdude-6.3.tar.gz
 
-    # tar xvf avrdude-<version>.tar.gz
-    # cd avrdude-<version>
+    # tar -xvf avrdude-6.3.tar.gz
+    # cd avrdude-6.3
     # mkdir obj-avr
     # cd obj-avr
-    # ../configure --prefix=/usr/tmp/gcc
+    # ../configure --prefix=$PREFIX
     # make
     # make install
     
     After compling and installing avrdude, copy a file that is
     needed by the wiring IDE from the avrdude directory:
-    >cp obj-avr/avrdude.conf $PREFIX/bin
+    # cp avrdude.conf $PREFIX/bin
     
     ...............
     
@@ -325,6 +318,8 @@ At a minimum, you will need the following things to build Wiring:
 
   - Linux: you'll likely find Ant in your distribution's package
     manager (e.g. on Debian or Ubuntu: sudo apt-get install ant).
+    
+    # sudo yum install ant
     
     For source build on Cent OS
     git clone https://git-wip-us.apache.org/repos/asf/ant
@@ -352,11 +347,22 @@ Depending on your platform, you will also need some other stuff:
 
     - tar: We test with GNU tar. This is almost certainly already
       installed on your system.
+      
+    #  sudo yum install tar.x86_64
+    already installed
+    
+    ---------------------------- done so far
+    
+    need to clone Wiring first?
+      
     - current ant build installs an old version of avr binaries,
       once the build finishes, copy your version of avr, assuming
       PREFIX in the avr installation process is set to $HOME/local/avr
       and $WIRING_DIR is the location where Wiring was cloned to then
       >cp -r $HOME/local/avr $WIRING_DIR/Wiring/out/dist/wirint-v1.0.1-dev/tools
+      
+      something like this ???
+      # cp -r $HOME/ttaveter/Programmid/Install $WIRING_DIR/Wiring/out/dist/wirint-v1.0.1-dev/tools
       
     - when building from source, be sure to add user to dialout group
       to ensure can upload code to wiring board for example using
