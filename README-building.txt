@@ -97,9 +97,6 @@ At a minimum, you will need the following things to build Wiring:
     # PREFIX=$HOME/ttaveter/Programmid/Install
     # export PREFIX
     
-    PREFIX=$HOME/tmp/gcc
-    usr/tmp/gcc
-    
     # PATH=$PATH:$PREFIX/bin
     # export PATH
     
@@ -164,7 +161,6 @@ At a minimum, you will need the following things to build Wiring:
     
     Configure the infrastructure using static libaries like this:
     ./configure --disable-shared --enable-static --prefix=$PREFIX
-    
     
     GMP
     
@@ -353,16 +349,19 @@ Depending on your platform, you will also need some other stuff:
     
     ---------------------------- done so far
     
-    need to clone Wiring first?
+    need to clone Wiring code from github first
+        $ git clone git://github.com/WiringProject/Wiring.git
       
     - current ant build installs an old version of avr binaries,
       once the build finishes, copy your version of avr, assuming
       PREFIX in the avr installation process is set to $HOME/local/avr
       and $WIRING_DIR is the location where Wiring was cloned to then
-      >cp -r $HOME/local/avr $WIRING_DIR/Wiring/out/dist/wirint-v1.0.1-dev/tools
+      >cp -r $HOME/local/avr $WIRING_DIR/Wiring/out/dist/wiring-v1.0.1-dev/tools
       
-      something like this ???
-      # cp -r $HOME/ttaveter/Programmid/Install $WIRING_DIR/Wiring/out/dist/wirint-v1.0.1-dev/tools
+      I used the following command
+      # cp -r $HOME/ttaveter/Programmid/Install/avr $HOME/Programmid/Source/Wiring/out/dist/wiring-v1.0.1-dev/tools
+      
+      # cp -r $HOME/ttaveter/Programmid/Install/avr $HOME/Programmid/Source/Wiring/out/dist/wiring-v1.0.1-dev/lib
       
     - when building from source, be sure to add user to dialout group
       to ensure can upload code to wiring board for example using
